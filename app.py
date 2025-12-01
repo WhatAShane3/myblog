@@ -61,5 +61,12 @@ def update(id):
     return render_template('create.html', post=post)
 
 
+@app.route('/delete/<int:id>', methods=['POST'])
+def delete(id):
+    global posts
+    posts = [p for p in posts if p['id'] != id]
+    return redirect(url_for('home'))
+
+
 if __name__ == '__main__':
     app.run(debug=True)

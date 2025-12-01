@@ -38,6 +38,11 @@
             <button type="submit" class="w-full bg-green-600 text-white font-bold py-2 rounded hover:bg-green-700 transition">
                  {% if post %} Update Post {% else %} Create Post {% endif %}
             </button>
+            {% if post %}
+            <button formaction="{{ url_for('delete', id=post.id) }}" formmethod="post" class="w-full bg-red-600 text-white font-bold py-2 rounded hover:bg-red-700 transition">
+                Delete Post
+            </button>
+            {% endif %}
         </form>
 
         <div class="mt-4 text-center">
