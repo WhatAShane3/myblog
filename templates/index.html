@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Travel Blog</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 font-sans p-6 max-w-6xl mx-auto">
+
+    <div class="flex flex-col md:flex-row justify-between items-center bg-white p-6 rounded-lg shadow-md mb-8">
+        <h1 class="text-2xl font-bold text-gray-800 mb-4 md:mb-0">My Myanmar Travel Blog</h1>
+        
+        <div class="flex gap-4 items-center w-full md:w-auto">
+            <a href="/" class="text-gray-600 hover:text-blue-500 font-medium">Home</a>
+            <a href="/create" class="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700 transition">Create +</a>
+            
+            <form action="/" method="GET" class="flex flex-1 md:w-auto">
+                <input type="text" name="q" placeholder="Search..." class="border border-gray-300 rounded-l px-3 py-2 w-full focus:outline-none focus:border-blue-500">
+                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-r hover:bg-blue-600">Find</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        
+        {% if posts|length == 0 %}
+            <p class="text-gray-500 col-span-3 text-center">No posts found.</p>
+        {% else %}
+            {% for post in posts %}
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 relative group">
+                <a href="/update/{{ post.id }}" class="absolute top-2 right-2 bg-white-400 text-white font-bold px-3 py-1 rounded shadow opacity-0 group-hover:opacity-100 transition z-10">
+                    Edit
+                </a>
+                {% if post.thumbnail %}
+                    <img src="{{ post.thumbnail }}" alt="Thumbnail" class="w-full h-48 object-cover">
+                {% else %}
+                    <div class="w-full h-48 bg-gray-200 flex items-center justify-center text-gray-400">No Image</div>
+                {% endif %}
+
+                <div class="p-5">
+                    <h2 class="text-xl font-bold text-gray-800 mb-2">{{ post.name }}</h2>
+                    <p class="text-gray-600 text-sm leading-relaxed">{{ post.text }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        {% endif %}
+
+    </div>
+
+</body>
+</html>

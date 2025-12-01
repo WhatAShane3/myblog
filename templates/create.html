@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% if post %}Edit Post{% else %}Create Post{% endif %}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 font-sans p-6 flex items-center justify-center min-h-screen">
+
+    <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-lg">
+        <h1 class="text-2xl font-bold text-gray-800 mb-6 text-center">
+            {% if post %} Edit Post {% else %} Create New Post {% endif %}
+        </h1>
+        
+        <form method="POST" class="space-y-4">
+            
+            <div>
+                <label class="block text-gray-700 font-medium mb-1">Post Title</label>
+                <input type="text" name="name" required placeholder="e.g. Trip to Bagan" 
+                       value="{{ post.name if post else '' }}"
+                       class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500">
+            </div>
+
+            <div>
+                <label class="block text-gray-700 font-medium mb-1">Thumbnail URL</label>
+                <input type="text" name="thumbnail" placeholder="https://..." 
+                       value="{{ post.thumbnail if post else '' }}"
+                       class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500">
+            </div>
+
+            <div>
+                <label class="block text-gray-700 font-medium mb-1">Content</label>
+                <textarea name="text" rows="5" required placeholder="Write your story..." 
+                          class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500">{{ post.text if post else '' }}</textarea>
+            </div>
+
+            <button type="submit" class="w-full bg-green-600 text-white font-bold py-2 rounded hover:bg-green-700 transition">
+                 {% if post %} Update Post {% else %} Create Post {% endif %}
+            </button>
+        </form>
+
+        <div class="mt-4 text-center">
+            <a href="/" class="text-blue-500 hover:underline">Back to Home</a>
+        </div>
+    </div>
+
+</body>
+</html>
