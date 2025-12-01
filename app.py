@@ -28,7 +28,6 @@ posts = [
 @app.route('/')
 def home():
     query = request.args.get('q')
-
     if query:
         filtered_posts = [p for p in posts if query.lower()
                           in p['name'].lower()]
