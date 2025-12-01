@@ -54,7 +54,6 @@ def create():
 def update(id):
     post = next((p for p in posts if p['id'] == id), None)
     if request.method == 'POST':
-        post["id"] = request.form['id']
         post['name'] = request.form['name']
         post['text'] = request.form['text']
         post['thumbnail'] = request.form['thumbnail']
